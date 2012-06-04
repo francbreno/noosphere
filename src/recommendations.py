@@ -19,7 +19,7 @@ critics = {'Lisa Rose': {'Lady in the Water': 2.5, 'Snakes on a Plane': 3.5, 'Ju
 from math import sqrt
 
 
-# Calcula similaridade utilizando distancia euleriana
+# Calcula similaridade utilizando distancia euclidiana
 def sim_distance(prefs, person1, person2):
 
 	si = {}
