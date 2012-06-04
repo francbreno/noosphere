@@ -75,7 +75,7 @@ def top_matches(prefs, person, n=5, similarity=sim_distance):
 
 
 # retorna uma lista de recomendacoes para um pessoa a partir de uma lista de preferencias
-def getRecommendations(prefs, person, similarity=sim_pearson):
+def get_recommendations(prefs, person, similarity=sim_pearson):
 	
 	totals = {}
 	simSums = {}
@@ -108,7 +108,7 @@ def getRecommendations(prefs, person, similarity=sim_pearson):
 	return rankings
 
 # inverte os avaliadores pelos itens avaliados e retorna um novo dicionario
-def transformPrefs(prefs):
+def transform_prefs(prefs):
 	
 	result = {}
 
@@ -119,3 +119,22 @@ def transformPrefs(prefs):
 
 	return result 
 	
+# Cria um dicinário de itens mostrando com quais outros itens eles se parecem.
+# A semelhança é baseada nas notas dadas pelos críticos.
+def calculate_similar_items(prefs, n=10):
+	
+	result = {}
+	
+	# Inverte a matriz de preferências para ela ser baseada em itens
+	itemPrefs = transform_prefs(prefs)
+	
+	c = 0
+	for item in itemPrefs:
+		c += 1
+		
+		if (c % 100) == 0: print "%d / %d" % (c, len(itemPrefs))
+		
+		scores = top_matches(itemPrefs, item, n=n, similarity=sim_distance)
+		result[item] = scores
+		
+	return result
